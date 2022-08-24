@@ -1,12 +1,14 @@
 package ru.aston.appolinarova.linkedlist;
 
-public class LinkedListNode<E> {
+import java.util.Comparator;
+
+public class LinkedListNode<E>{
 
     private E currentElement;
     private LinkedListNode<E> nextElement;
     private LinkedListNode<E> prevElement;
 
-    public LinkedListNode(LinkedListNode<E> prevElement, E currentElement, LinkedListNode<E> nextElement) {
+    public LinkedListNode(E currentElement, LinkedListNode<E> prevElement,  LinkedListNode<E> nextElement) {
         this.currentElement = currentElement;
         this.nextElement = nextElement;
         this.prevElement = prevElement;
@@ -16,6 +18,8 @@ public class LinkedListNode<E> {
     public String toString() {
         return "LinkedListNode{ " + currentElement.toString();
     }
+
+
 
     public E getCurrentElement() {
         return currentElement;
@@ -40,4 +44,5 @@ public class LinkedListNode<E> {
     public void setPrevElement(LinkedListNode<E> prevElement) {
         this.prevElement = prevElement;
     }
+
 }

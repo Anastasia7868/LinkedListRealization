@@ -1,45 +1,31 @@
 package ru.aston.appolinarova.linkedlist;
 
-
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 public class LinkedListRealization<E> implements Linked<E> {
 
-   /* Написать свою реализацию LinkedList (принцип работы связного списка должен сохраниться), обязательные методы:
-add - добавляет элемент
-delete(Element) - удаляет элемент
-sort - сортирует список. Использовать алгоритм quickSort
-Остальные методы и принцип реализации на ваше усмотрение.
-Опционально: написать тесты на каждый метод*/
 
     private int listSize;
     private LinkedListNode<E> firstNode;
     private LinkedListNode<E> lastNode;
 
-
     public LinkedListRealization() {
+        lastNode = new LinkedListNode<E>(null, firstNode, null);
+        firstNode = new LinkedListNode<E>(null, null, lastNode);
 
     }
 
     @Override
     public boolean add(E value) {
-        final LinkedListNode<E> lastElement = lastNode;
-        final LinkedListNode<E> newNode = new LinkedListNode<E>(lastElement, value, null);
-        lastNode = newNode;
-        if (lastElement == null)
-            firstNode = newNode;
-        else
-            lastElement.setNextElement(newNode);
+        final LinkedListNode<E> prev = lastNode;
+        prev.setCurrentElement(value);
+        lastNode = new LinkedListNode<E>(null, prev, null);
+        prev.setNextElement(lastNode);
         listSize++;
         return true;
     }
 
     public void remove(E element) {
-
         LinkedListNode<E> current = firstNode;
         while (current.getCurrentElement() != element) {
             current = current.getNextElement();
@@ -59,5 +45,43 @@ sort - сортирует список. Использовать алгорит�
         return listSize;
     }
 
+    @Override
+    public E getElementByIndex(int index) {
+        LinkedListNode<E> target = firstNode.getNextElement();
+        for (int i = 0; i < index; i++) {
+            target = getNextElement(target);
+        }
+        return target.getCurrentElement();
 
+    }
+
+    private LinkedListNode<E> getNextElement(LinkedListNode<E> current) {
+        return current.getNextElement();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LinkedListRealization<?> that = (LinkedListRealization<?>) o;
+
+        if (listSize != that.listSize) return false;
+        if (firstNode != null ? !firstNode.equals(that.firstNode) : that.firstNode != null)
+            return false;
+        return lastNode != null ? lastNode.equals(that.lastNode) : that.lastNode == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = listSize;
+        result = 31 * result + (firstNode != null ? firstNode.hashCode() : 0);
+        result = 31 * result + (lastNode != null ? lastNode.hashCode() : 0);
+        return result;
+    }
+
+    public static void quickSort(int low, int high) {
+
+
+    }
 }

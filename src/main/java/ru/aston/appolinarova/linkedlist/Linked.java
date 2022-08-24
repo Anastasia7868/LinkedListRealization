@@ -5,6 +5,8 @@ public interface Linked<E> {
     public boolean add(E value);
 
     public void remove(E element);
-    int listSize();
+    public int listSize();
+    public E getElementByIndex(int index);
+
 
 }
