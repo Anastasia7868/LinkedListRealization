@@ -2,10 +2,34 @@ package ru.aston.appolinarova.linkedlist;
 
 import org.junit.Test;
 
+
+import static org.junit.Assert.assertEquals;
+
 public class Tests {
 
     @Test
-    public void testLinkedList(){
+    public void testLinkedList() {
+        LinkedListRealization list = new LinkedListRealization();
+
+        list.add("Leo");
+        assertEquals(1, list.listSize());
+        list.add("Tom");
+        list.add("Anton");
+        assertEquals("Leo Tom Anton", list.toString());
+        assertEquals(3, list.listSize());
+        list.remove("Tom");
+        assertEquals("Leo Anton", list.toString());
+        assertEquals(2, list.listSize());
+        list.quickSort(list, 0, list.listSize() - 1);
+        assertEquals("Anton Leo", list.toString());
+        list.clear();
+        list.add("10");
+        list.add("100");
+        list.add("1");
+        assertEquals("10 100 1", list.toString());
+        list.quickSort(list, 0, list.listSize() - 1);
+        assertEquals("1 10 100", list.toString());
 
     }
+
 }

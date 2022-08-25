@@ -1,5 +1,6 @@
 package ru.aston.appolinarova.linkedlist;
 
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class LinkedListRealization<E extends Comparable<? super E>> implements Linked<E> {
@@ -65,7 +66,9 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < listSize; i++) {
             sb.append(getElementByIndex(i));
-            sb.append(" ");
+            if (i < (listSize-1)) {
+                sb.append(" ");
+            }
         }
         return sb.toString();
     }
@@ -133,5 +136,18 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
 
     public void setLastNode(LinkedListNode<E> lastNode) {
         this.lastNode = lastNode;
+    }
+
+    public void clear(){
+        for (LinkedListNode<E> x = firstNode; x != null; ) {
+            LinkedListNode<E> next = x.getNextElement();
+            x.setCurrentElement(null);
+            x.setNextElement(null);
+            x.setPrevElement(null);
+            x = next;
+        }
+        lastNode = new LinkedListNode<E>(null, firstNode, null);
+        firstNode = new LinkedListNode<E>(null, null, lastNode);
+        listSize = 0;
     }
 }
