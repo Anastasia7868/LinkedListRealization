@@ -1,8 +1,7 @@
 package ru.aston.appolinarova.linkedlist;
 
-import java.util.Comparator;
 
-public class LinkedListNode<E>{
+public class LinkedListNode <E extends Comparable<? super E>> {
 
     private E currentElement;
     private LinkedListNode<E> nextElement;
@@ -13,12 +12,6 @@ public class LinkedListNode<E>{
         this.nextElement = nextElement;
         this.prevElement = prevElement;
     }
-
-    @Override
-    public String toString() {
-        return "LinkedListNode{ " + currentElement.toString();
-    }
-
 
 
     public E getCurrentElement() {
@@ -44,5 +37,6 @@ public class LinkedListNode<E>{
     public void setPrevElement(LinkedListNode<E> prevElement) {
         this.prevElement = prevElement;
     }
+
 
 }

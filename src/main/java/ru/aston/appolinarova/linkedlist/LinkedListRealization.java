@@ -2,12 +2,13 @@ package ru.aston.appolinarova.linkedlist;
 
 import java.util.NoSuchElementException;
 
-public class LinkedListRealization<E> implements Linked<E> {
+public class LinkedListRealization<E extends Comparable<? super E>> implements Linked<E> {
 
 
     private int listSize;
     private LinkedListNode<E> firstNode;
     private LinkedListNode<E> lastNode;
+
 
     public LinkedListRealization() {
         lastNode = new LinkedListNode<E>(null, firstNode, null);
@@ -52,36 +53,85 @@ public class LinkedListRealization<E> implements Linked<E> {
             target = getNextElement(target);
         }
         return target.getCurrentElement();
-
     }
 
     private LinkedListNode<E> getNextElement(LinkedListNode<E> current) {
         return current.getNextElement();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        LinkedListRealization<?> that = (LinkedListRealization<?>) o;
-
-        if (listSize != that.listSize) return false;
-        if (firstNode != null ? !firstNode.equals(that.firstNode) : that.firstNode != null)
-            return false;
-        return lastNode != null ? lastNode.equals(that.lastNode) : that.lastNode == null;
-    }
 
     @Override
-    public int hashCode() {
-        int result = listSize;
-        result = 31 * result + (firstNode != null ? firstNode.hashCode() : 0);
-        result = 31 * result + (lastNode != null ? lastNode.hashCode() : 0);
-        return result;
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < listSize; i++) {
+            sb.append(getElementByIndex(i));
+            sb.append(" ");
+        }
+        return sb.toString();
     }
 
-    public static void quickSort(int low, int high) {
+    public void quickSort(LinkedListRealization<E> linkedListRealization, int startIndex, int endIndex) {
 
+        if (linkedListRealization.listSize() == 0) {
+            return;
+        }
+        if (startIndex > endIndex) {
+            return;
+        }
+        int middle = startIndex + (endIndex - startIndex) / 2;
+        int low = startIndex;
+        int high = endIndex;
 
+        while (low <= high) {
+            while (linkedListRealization.getElementByIndex(low).compareTo(linkedListRealization.getElementByIndex(middle))
+                    < 0) {
+                low++;
+            }
+            while (linkedListRealization.getElementByIndex(high).compareTo(linkedListRealization
+                    .getElementByIndex(middle)) > 0) {
+                high--;
+            }
+
+            if (low <= high) {
+                E tmp = linkedListRealization.getElementByIndex(low);
+                linkedListRealization.getNodeByIndex(low)
+                        .setCurrentElement(linkedListRealization.getElementByIndex(high));
+                linkedListRealization.getNodeByIndex(high).setCurrentElement(tmp);
+                low++;
+                high--;
+            }
+        }
+
+        if (startIndex < high) {
+            quickSort(linkedListRealization, startIndex, high);
+        }
+        if (endIndex > low) {
+            quickSort(linkedListRealization, low, endIndex);
+        }
+
+    }
+
+    public LinkedListNode getNodeByIndex(int index) {
+        LinkedListNode<E> target = firstNode.getNextElement();
+        for (int i = 0; i < index; i++) {
+            target = getNextElement(target);
+        }
+        return target;
+    }
+
+    public LinkedListNode<E> getFirstNode() {
+        return firstNode;
+    }
+
+    public void setFirstNode(LinkedListNode<E> firstNode) {
+        this.firstNode = firstNode;
+    }
+
+    public LinkedListNode<E> getLastNode() {
+        return lastNode;
+    }
+
+    public void setLastNode(LinkedListNode<E> lastNode) {
+        this.lastNode = lastNode;
     }
 }
