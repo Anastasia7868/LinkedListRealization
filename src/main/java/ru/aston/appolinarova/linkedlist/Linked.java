@@ -6,8 +6,15 @@ public interface Linked<E extends Comparable<? super E>> {
 
     public void remove(E element);
 
-    public int listSize();
+    public int getListSize();
 
     public E getElementByIndex(int index);
+
+    public void quickSort(LinkedListRealization<E> linkedListRealization,
+                          int startIndex, int endIndex);
+
+    public void clear();
+
+    public LinkedListNode<E> getNodeByIndex(int index);
 
 }
