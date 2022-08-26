@@ -8,6 +8,7 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
     private int listSize;
     private LinkedListNode<E> firstNode;
     private LinkedListNode<E> lastNode;
+    //уразобраться с компаратором
 
 
     public LinkedListRealization() {
@@ -41,8 +42,6 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
         current.getPrevElement().setNextElement(current.getNextElement());
         listSize--;
     }
-
-
 
     @Override
     public String toString() {
@@ -116,8 +115,7 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
         listSize = 0;
     }
 
-    @Override
-    public LinkedListNode getNodeByIndex(int index) {
+    private LinkedListNode<E> getNodeByIndex(int index) {
         LinkedListNode<E> target = firstNode.getNextElement();
         for (int i = 0; i < index; i++) {
             target = getNextElement(target);
@@ -152,12 +150,52 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
     }
 
 
-
     public LinkedListNode<E> getLastNode() {
         return lastNode;
     }
 
     public void setLastNode(LinkedListNode<E> lastNode) {
         this.lastNode = lastNode;
+    }
+
+    private static class LinkedListNode<E extends Comparable<? super E>> {
+        // сделать внутренним по линкед листе
+
+
+        private E currentElement;
+        private LinkedListNode<E> nextElement;
+        private LinkedListNode<E> prevElement;
+
+        public LinkedListNode(E currentElement, LinkedListNode<E> prevElement,
+                              LinkedListNode<E> nextElement) {
+            this.currentElement = currentElement;
+            this.nextElement = nextElement;
+            this.prevElement = prevElement;
+        }
+
+        public E getCurrentElement() {
+            return currentElement;
+        }
+
+        public void setCurrentElement(E currentElement) {
+            this.currentElement = currentElement;
+        }
+
+        public LinkedListNode<E> getNextElement() {
+            return nextElement;
+        }
+
+        public void setNextElement(LinkedListNode<E> nextElement) {
+            this.nextElement = nextElement;
+        }
+
+        public LinkedListNode<E> getPrevElement() {
+            return prevElement;
+        }
+
+        public void setPrevElement(LinkedListNode<E> prevElement) {
+            this.prevElement = prevElement;
+        }
+
     }
 }

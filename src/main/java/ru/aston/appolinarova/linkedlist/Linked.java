@@ -15,6 +15,4 @@ public interface Linked<E extends Comparable<? super E>> {
 
     public void clear();
 
-    public LinkedListNode<E> getNodeByIndex(int index);
-
 }
