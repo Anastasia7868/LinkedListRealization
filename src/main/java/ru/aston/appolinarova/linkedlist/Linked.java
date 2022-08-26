@@ -10,8 +10,7 @@ public interface Linked<E extends Comparable<? super E>> {
 
     public E getElementByIndex(int index);
 
-    public void quickSort(LinkedListRealization<E> linkedListRealization,
-                          int startIndex, int endIndex);
+    public void quickSort(int startIndex, int endIndex);
 
     public void clear();
 

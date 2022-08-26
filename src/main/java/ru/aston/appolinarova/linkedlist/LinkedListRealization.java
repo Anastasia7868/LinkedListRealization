@@ -56,10 +56,9 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
     }
 
     @Override
-    public void quickSort(LinkedListRealization<E> linkedListRealization, int startIndex,
-                          int endIndex) {
+    public void quickSort(int startIndex, int endIndex) {
 
-        if (linkedListRealization.getListSize() == 0) {
+        if (getListSize() == 0) {
             return;
         }
         if (startIndex > endIndex) {
@@ -70,36 +69,30 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
         int highBorder = endIndex;
 
         while (lowBorder <= highBorder) {
-            while (linkedListRealization.getElementByIndex(lowBorder)
-                    .compareTo(linkedListRealization.getElementByIndex(middle)) < 0) {
+            while (getElementByIndex(lowBorder).compareTo(getElementByIndex(middle)) < 0) {
                 lowBorder++;
             }
-            while (linkedListRealization.getElementByIndex(highBorder)
-                    .compareTo(linkedListRealization
-                    .getElementByIndex(middle)) > 0) {
+            while (getElementByIndex(highBorder).compareTo(getElementByIndex(middle)) > 0) {
                 highBorder--;
             }
 
-
             if (lowBorder <= highBorder) {
-                E tmp = linkedListRealization.getElementByIndex(lowBorder);
-                linkedListRealization.getNodeByIndex(lowBorder)
-                        .setCurrentElement(linkedListRealization.getElementByIndex(highBorder));
-                linkedListRealization.getNodeByIndex(highBorder).setCurrentElement(tmp);
+                E tmp = getElementByIndex(lowBorder);
+                getNodeByIndex(lowBorder).setCurrentElement(getElementByIndex(highBorder));
+                getNodeByIndex(highBorder).setCurrentElement(tmp);
                 lowBorder++;
                 highBorder--;
             }
         }
 
         if (startIndex < highBorder) {
-            quickSort(linkedListRealization, startIndex, highBorder);
+            quickSort(startIndex, highBorder);
         }
         if (endIndex > lowBorder) {
-            quickSort(linkedListRealization, lowBorder, endIndex);
+            quickSort(lowBorder, endIndex);
         }
 
     }
-
 
     @Override
     public void clear() {
@@ -159,8 +152,6 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
     }
 
     private static class LinkedListNode<E extends Comparable<? super E>> {
-        // сделать внутренним по линкед листе
-
 
         private E currentElement;
         private LinkedListNode<E> nextElement;

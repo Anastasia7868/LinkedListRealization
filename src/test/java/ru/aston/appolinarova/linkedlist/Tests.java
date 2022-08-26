@@ -21,14 +21,14 @@ public class Tests {
         list.remove("Tom");
         assertEquals("Leo Anton", list.toString());
         assertEquals(2, list.getListSize());
-        list.quickSort(list, 0, list.getListSize() - 1);
+        list.quickSort(0, list.getListSize() - 1);
         assertEquals("Anton Leo", list.toString());
         list.clear();
         list.add(10);
         list.add(100);
         list.add(1);
         assertEquals("10 100 1", list.toString());
-        list.quickSort(list, 0, list.getListSize() - 1);
+        list.quickSort(0, list.getListSize() - 1);
         assertEquals("1 10 100", list.toString());
     }
 }
