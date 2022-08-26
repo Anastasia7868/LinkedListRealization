@@ -8,7 +8,6 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
     private int listSize;
     private LinkedListNode<E> firstNode;
     private LinkedListNode<E> lastNode;
-    //уразобраться с компаратором
 
 
     public LinkedListRealization() {
