@@ -1,6 +1,5 @@
 package ru.aston.appolinarova.linkedlist;
 
-
 import java.util.Comparator;
 
 public interface Linked<E> {
@@ -16,5 +15,9 @@ public interface Linked<E> {
     public void quickSort(int startIndex, int endIndex, Comparator<? super E> c);
 
     public void clear();
+
+    public E getFirst();
+
+    public E getLast();
 
 }

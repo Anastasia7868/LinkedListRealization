@@ -16,6 +16,7 @@ public class Tests {
         assertEquals(1, list.getListSize());
         list.add("Tom");
         list.add("Anton");
+        assertEquals("Leo", list.getFirst());
         assertEquals("Leo Tom Anton", list.toString());
         assertEquals(3, list.getListSize());
         list.remove("Tom");
@@ -33,6 +34,8 @@ public class Tests {
         list.add(100);
         list.add(1);
         assertEquals("10 100 1", list.toString());
+        assertEquals("10", list.getFirst().toString());
+        assertEquals("1", list.getLast().toString());
         list.quickSort(0, list.getListSize() - 1, new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {

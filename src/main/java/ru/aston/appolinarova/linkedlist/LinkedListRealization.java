@@ -94,7 +94,6 @@ public class LinkedListRealization<E> implements Linked<E> {
 
     }
 
-
     @Override
     public void clear() {
         for (LinkedListNode<E> x = firstNode; x != null; ) {
@@ -137,6 +136,22 @@ public class LinkedListRealization<E> implements Linked<E> {
 
     public LinkedListNode<E> getFirstNode() {
         return firstNode;
+    }
+
+    @Override
+    public E getFirst() {
+        final LinkedListNode<E> first = getFirstNode();
+        if (first == null)
+            throw new NoSuchElementException();
+        return first.getNextElement().getCurrentElement();
+    }
+
+    @Override
+    public E getLast() {
+        final LinkedListNode last = getLastNode();
+        if (last == null)
+            throw new NoSuchElementException();
+        return (E) last.getPrevElement().getCurrentElement();
     }
 
     public void setFirstNode(LinkedListNode<E> firstNode) {
@@ -188,6 +203,5 @@ public class LinkedListRealization<E> implements Linked<E> {
         public void setPrevElement(LinkedListNode<E> prevElement) {
             this.prevElement = prevElement;
         }
-
     }
 }
