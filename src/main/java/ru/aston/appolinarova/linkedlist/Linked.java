@@ -1,6 +1,9 @@
 package ru.aston.appolinarova.linkedlist;
 
-public interface Linked<E extends Comparable<? super E>> {
+
+import java.util.Comparator;
+
+public interface Linked<E> {
 
     public boolean add(E value);
 
@@ -10,7 +13,7 @@ public interface Linked<E extends Comparable<? super E>> {
 
     public E getElementByIndex(int index);
 
-    public void quickSort(int startIndex, int endIndex);
+    public void quickSort(int startIndex, int endIndex, Comparator<? super E> c);
 
     public void clear();
 

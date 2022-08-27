@@ -3,11 +3,11 @@ package ru.aston.appolinarova.linkedlist;
 import org.junit.Test;
 
 
-import java.util.LinkedList;
-
+import java.util.Comparator;
 import static org.junit.Assert.assertEquals;
 
 public class Tests {
+
 
     @Test
     public void testLinkedList() {
@@ -21,14 +21,24 @@ public class Tests {
         list.remove("Tom");
         assertEquals("Leo Anton", list.toString());
         assertEquals(2, list.getListSize());
-        list.quickSort(0, list.getListSize() - 1);
+        list.quickSort(0, list.getListSize() - 1, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
         assertEquals("Anton Leo", list.toString());
         list.clear();
         list.add(10);
         list.add(100);
         list.add(1);
         assertEquals("10 100 1", list.toString());
-        list.quickSort(0, list.getListSize() - 1);
+        list.quickSort(0, list.getListSize() - 1, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
         assertEquals("1 10 100", list.toString());
     }
 }

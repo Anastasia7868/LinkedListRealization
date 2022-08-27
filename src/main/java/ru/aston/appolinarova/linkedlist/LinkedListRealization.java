@@ -1,8 +1,9 @@
 package ru.aston.appolinarova.linkedlist;
 
+import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-public class LinkedListRealization<E extends Comparable<? super E>> implements Linked<E> {
+public class LinkedListRealization<E> implements Linked<E> {
 
     public static final int DELIMITER = 2;
     private int listSize;
@@ -55,7 +56,7 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
     }
 
     @Override
-    public void quickSort(int startIndex, int endIndex) {
+    public void quickSort(int startIndex, int endIndex, Comparator<? super E> c) {
 
         if (getListSize() == 0) {
             return;
@@ -68,10 +69,10 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
         int highBorder = endIndex;
 
         while (lowBorder <= highBorder) {
-            while (getElementByIndex(lowBorder).compareTo(getElementByIndex(middle)) < 0) {
+            while (c.compare(getElementByIndex(lowBorder), getElementByIndex(middle)) < 0) {
                 lowBorder++;
             }
-            while (getElementByIndex(highBorder).compareTo(getElementByIndex(middle)) > 0) {
+            while (c.compare(getElementByIndex(highBorder), getElementByIndex(middle)) > 0) {
                 highBorder--;
             }
 
@@ -85,13 +86,14 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
         }
 
         if (startIndex < highBorder) {
-            quickSort(startIndex, highBorder);
+            quickSort(startIndex, highBorder, c);
         }
         if (endIndex > lowBorder) {
-            quickSort(lowBorder, endIndex);
+            quickSort(lowBorder, endIndex, c);
         }
 
     }
+
 
     @Override
     public void clear() {
@@ -150,7 +152,7 @@ public class LinkedListRealization<E extends Comparable<? super E>> implements L
         this.lastNode = lastNode;
     }
 
-    private static class LinkedListNode<E extends Comparable<? super E>> {
+    private static class LinkedListNode<E> {
 
         private E currentElement;
         private LinkedListNode<E> nextElement;
